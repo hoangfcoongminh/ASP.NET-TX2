@@ -1,0 +1,97 @@
+﻿@model IEnumerable<TX2.Models.Product>
+@using TX2.Models
+@{
+    ViewBag.Title = "Index";
+    List<Product> findByID = ViewBag.findByID;
+    List<Product> findByPrice = ViewBag.findByPrice;
+}
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Tìm kiếm theo:
+        <input type="radio" name="searchType" value="price" /> Nhỏ hơn giá &nbsp;
+        <input type="radio" name="searchType" value="name" /> Tên
+        <br />
+        Tìm: @Html.TextBox("searchString")
+        <input type="submit" value="Tìm" />
+    </p>
+}
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+</p>
+
+<h2>Danh sách toàn bộ sản phẩm</h2>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 table-bordered border text-center mb-5"
+             onclick="window.open('@Url.Action("Details", new { id = item.Pid })', '_blank')"
+             style="cursor: pointer;">
+            Mã sản phẩm: <b>@Html.DisplayFor(modelItem => item.Pid)</b> <br />
+            Tên sản phẩm: <b>@Html.DisplayFor(modelItem => item.ProdName)</b> <br />
+            Mô tả: <b>@Html.DisplayFor(modelItem => item.Description)</b> <br />
+            @{
+                var imgPath = "~/Content/Images/" + item.ImagePath;
+                <img src="@Url.Content(imgPath)" height="200" />
+            }
+            <br />
+            Giá tiền: <b>@Html.DisplayFor(modelItem => item.Price)</b> <br />
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Pid }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Pid }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.Pid })
+        </div>
+    }
+</div>
+
+
+<h2>Danh sách sản phẩm theo ID</h2>
+<div class="row">
+    @foreach (var item in findByID)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 table-bordered border text-center mb-5"
+                onclick="window.open('@Url.Action("Details", new { id = item.Pid })', '_blank')"
+                style="cursor: pointer;">
+            Mã sản phẩm: <b>@Html.DisplayFor(modelItem => item.Pid)</b> <br />
+            Tên sản phẩm: <b>@Html.DisplayFor(modelItem => item.ProdName)</b> <br />
+            Mô tả: <b>@Html.DisplayFor(modelItem => item.Description)</b> <br />
+            @{
+                var imgPath = "~/Content/Images/" + item.ImagePath;
+                <img src="@Url.Content(imgPath)" height="200" />
+            }
+            <br />
+            Giá tiền: <b>@Html.DisplayFor(modelItem => item.Price)</b> <br />
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Pid }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Pid }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.Pid })
+        </div>
+    }
+</div>
+
+<h2>Danh sách sản phẩm theo Giá</h2>
+<div class="row">
+    @foreach (var item in findByPrice)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 table-bordered border text-center mb-5"
+                onclick="window.open('@Url.Action("Details", new { id = item.Pid })', '_blank')"
+                style="cursor: pointer;">
+            Mã sản phẩm: <b>@Html.DisplayFor(modelItem => item.Pid)</b> <br />
+            Tên sản phẩm: <b>@Html.DisplayFor(modelItem => item.ProdName)</b> <br />
+            Mô tả: <b>@Html.DisplayFor(modelItem => item.Description)</b> <br />
+            @{
+                var imgPath = "~/Content/Images/" + item.ImagePath;
+                <img src="@Url.Content(imgPath)" height="200" />
+            }
+            <br />
+            Giá tiền: <b>@Html.DisplayFor(modelItem => item.Price)</b> <br />
+            @Html.ActionLink("Sửa", "Edit", new { id = item.Pid }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.Pid }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.Pid })
+        </div>
+    }
+</div>
+
+
+

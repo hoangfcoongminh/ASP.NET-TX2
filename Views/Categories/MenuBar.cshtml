@@ -1,0 +1,6 @@
+﻿@model IEnumerable<TX2.Models.Category>
+
+@foreach (var item in Model)
+{
+    <li><a href="/Shop/DanhMuc/@item.Categoryid" class="nav-link">@Html.DisplayFor(modelItem => item.CategoryName)</a></li>
+}
